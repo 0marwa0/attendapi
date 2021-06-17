@@ -50,12 +50,25 @@ app.post("/addattend", (req, res) => {
 app.use("/public", experss.static("public"));
 
 // GET REQUEST
-app.get("/", (req, res) => {
-Store.find({}).then((data) => {
+app.get("/getSesstion/:id", (req, res) => {console.log(req.params.id)
+Store.findById(req.params.id)
+
+.then((data) => {
 res.send(data);
   }) .catch((err) => {
     res.status(500).json({
       error: err,
+    });
+  });
+});
+app.put("/updateSesstion/:id", (req, res) => {
+
+
+ Store.findByIdAndUpdate(req.params.id, {
+    $set: { attendData: req.body.email },
+  }).then(() => {
+    Store.findOne({ _id: req.params.id }).then((data) => {
+      res.send(data);
     });
   });
 });
