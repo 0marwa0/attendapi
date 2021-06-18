@@ -32,7 +32,8 @@ app.post("/addattend", (req, res) => {
      attendData: [req.body.email],
      admin:req.body.admin
     });
-  console.log(req.body.email)
+
+  try {
     Store.create(record)
       .then((result) => {
         res.status(201).json({
@@ -45,13 +46,19 @@ app.post("/addattend", (req, res) => {
           error: err,
         });
       });
+
+
+} catch (error) {
+  console.lgo(error)
+}
+
   });
 
 app.use("/public", experss.static("public"));
 
 // GET REQUEST
 app.get("/getSesstion/:id", (req, res) => {console.log(req.params.id)
-Store.findById(req.params.id)
+  try {Store.findById(req.params.id)
 .then((data) => {
 res.send(data);
   }) .catch((err) => {
@@ -59,9 +66,18 @@ res.send(data);
       error: err,
     });
   });
+
+    
+  } catch (error) {
+    console.lgo(error)
+
+  }
 });
 
 app.put("/updateSesstion/:id", (req, res) => {
+  try {
+    
+  
  Store.findByIdAndUpdate(req.params.id, {
     $set: { attendData: req.body.email },
   }).then(() => {
@@ -72,5 +88,11 @@ app.put("/updateSesstion/:id", (req, res) => {
     res.status(500).json({
       error: err,
     });
-  });;
+  })
+
+} catch (error) {
+  console.lgo(error)
+
+  }
+
 });
