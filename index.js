@@ -48,9 +48,10 @@ app.post("/addattend", (req, res) => {
       });
 
 
-} catch (error) {
-  console.lgo(error)
-}
+}catch {
+  console.lgo("somthing worng happend")
+
+  }
 
   });
 
@@ -68,10 +69,10 @@ res.send(data);
   });
 
     
-  } catch (error) {
-    console.lgo(error)
-
-  }
+  } catch {
+    console.lgo("somthing worng happend")
+  
+    }
 });
 
 app.put("/updateSesstion/:id", (req, res) => {
@@ -90,8 +91,8 @@ app.put("/updateSesstion/:id", (req, res) => {
     });
   })
 
-} catch (error) {
-  console.lgo(error)
+} catch {
+  console.lgo("somthing worng happend")
 
   }
 
