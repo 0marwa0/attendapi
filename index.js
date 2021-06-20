@@ -14,8 +14,9 @@ app.use(cors());
 app.use(methodOverride(`_method`));
 app.listen(process.env.PORT || 7000, () => {
   console.log("working on 7000 port");
+
 });
-let gfs;
+
 try {
   mongoose.connect("mongodb://localhost/DataStore", {
   useNewUrlParser: true,
@@ -24,7 +25,7 @@ try {
   useFindAndModify: false,
 });
 } catch (error) {
-  console.log("error when connect to the datebase ")
+  console.log("error when connect to the datebase ",error)
 }
 
 app.post("/addattend", (req, res) => {
