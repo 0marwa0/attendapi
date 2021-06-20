@@ -13,8 +13,9 @@ app.use(methodOverride(`_method`));
 app.listen(process.env.PORT || 7000, () => {
   console.log("working on 7000 port");
 });
+const connectDB = async()=>{
 try {
-  mongoose.connect("mongodb://localhost/DataStore", {
+  await mongoose.connect("mongodb://localhost/DataStore", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
@@ -22,8 +23,8 @@ try {
 });
 } catch (error) {
   console.log("error when connect to the datebase ",error)
-}
-
+}}
+connectDB()
 // app.post("/addattend", (req, res) => {
     
 
