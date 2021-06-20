@@ -3,10 +3,8 @@ const app = experss();
 const mongoose = require("mongoose");
 const cors = require("cors");
 const Store = require("./modules/store");
-
 const methodOverride = require("method-override");
 var bodyParser = require("body-parser");
-
 //Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -14,9 +12,7 @@ app.use(cors());
 app.use(methodOverride(`_method`));
 app.listen(process.env.PORT || 7000, () => {
   console.log("working on 7000 port");
-
 });
-
 try {
   mongoose.connect("mongodb://localhost/DataStore", {
   useNewUrlParser: true,
@@ -29,7 +25,9 @@ try {
 }
 
 app.post("/addattend", (req, res) => {
-    const record = new Store({
+    
+
+  try {const record = new Store({
       date:new Date(),
       courseName:req.body.courseName,
       group:req.body.group,
@@ -37,8 +35,6 @@ app.post("/addattend", (req, res) => {
      attendData: [req.body.email],
      admin:req.body.admin
     });
-
-  try {
     Store.create(record)
       .then((result) => {
         res.status(201).json({
@@ -83,7 +79,6 @@ res.send(data);
 app.put("/updateSesstion/:id", (req, res) => {
   try {
     
-  console.log(req.body.email,"id")
  Store.findByIdAndUpdate(req.params.id, {
     $set: { attendData: req.body.email },
   }).then(() => {
