@@ -24,39 +24,39 @@ try {
   console.log("error when connect to the datebase ",error)
 }
 
-app.post("/addattend", (req, res) => {
+// app.post("/addattend", (req, res) => {
     
 
-  try {const record = new Store({
-      date:new Date(),
-      courseName:req.body.courseName,
-      group:req.body.group,
-      stage:req.body.stage,
-     attendData: [req.body.email],
-     admin:req.body.admin
-    });
-    Store.create(record)
-      .then((result) => {
-        res.status(201).json({
-          message: "done with adding",
-          data: result,
-        });
-      })
-      .catch((err) => {
-        res.status(500).json({
-          error: err,
-        });
-      });
+//   try {const record = new Store({
+//       date:new Date(),
+//       courseName:req.body.courseName,
+//       group:req.body.group,
+//       stage:req.body.stage,
+//      attendData: [req.body.email],
+//      admin:req.body.admin
+//     });
+//     Store.create(record)
+//       .then((result) => {
+//         res.status(201).json({
+//           message: "done with adding",
+//           data: result,
+//         });
+//       })
+//       .catch((err) => {
+//         res.status(500).json({
+//           error: err,
+//         });
+//       });
 
 
-}catch {
-  console.lgo("somthing worng happend")
+// }catch {
+//   console.lgo("somthing worng happend")
 
-  }
+//   }
 
-  });
+//   });
 
-app.use("/public", experss.static("public"));
+// app.use("/public", experss.static("public"));
 
 // GET REQUEST
 app.get("/getSesstion/:id", (req, res) => {console.log(req.params.id)
@@ -76,24 +76,24 @@ res.send(data);
     }
 });
 
-app.put("/updateSesstion/:id", (req, res) => {
-  try {
+// app.put("/updateSesstion/:id", (req, res) => {
+//   try {
     
- Store.findByIdAndUpdate(req.params.id, {
-    $set: { attendData: req.body.email },
-  }).then(() => {
-    Store.findOne({ _id: req.params.id }).then((data) => {
-      res.send(data);
-    });
-  }).catch((err) => {
-    res.status(500).json({
-      error: err,
-    });
-  })
+//  Store.findByIdAndUpdate(req.params.id, {
+//     $set: { attendData: req.body.email },
+//   }).then(() => {
+//     Store.findOne({ _id: req.params.id }).then((data) => {
+//       res.send(data);
+//     });
+//   }).catch((err) => {
+//     res.status(500).json({
+//       error: err,
+//     });
+//   })
 
-} catch {
-  console.lgo("somthing worng happend")
+// } catch {
+//   console.lgo("somthing worng happend")
 
-  }
+//   }
 
-});
+// });
