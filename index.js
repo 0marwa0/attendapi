@@ -16,13 +16,17 @@ app.listen(process.env.PORT || 7000, () => {
   console.log("working on 7000 port");
 });
 let gfs;
-
-mongoose.connect("mongodb://localhost/DataStore", {
+try {
+  mongoose.connect("mongodb://localhost/DataStore", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
   useFindAndModify: false,
 });
+} catch (error) {
+  console.log("error when connect to the datebase ")
+}
+
 app.post("/addattend", (req, res) => {
     const record = new Store({
       date:new Date(),
@@ -78,7 +82,7 @@ res.send(data);
 app.put("/updateSesstion/:id", (req, res) => {
   try {
     
-  
+  console.log(req.body.email,"id")
  Store.findByIdAndUpdate(req.params.id, {
     $set: { attendData: req.body.email },
   }).then(() => {
