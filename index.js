@@ -6,6 +6,8 @@ const Store = require("./modules/store");
 const methodOverride = require("method-override");
 var bodyParser = require("body-parser");
 //Middleware
+const methodOverride = require("method-override");
+var bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
@@ -33,7 +35,7 @@ app.post("/addattend", (req, res) => {
       courseName:req.body.courseName,
       group:req.body.group,
       stage:req.body.stage,
-     attendData: [req.body.email],
+     attendData: req.body.attendData,
      admin:req.body.admin
     });
     Store.create(record)
@@ -58,9 +60,12 @@ app.post("/addattend", (req, res) => {
   });
 
 app.use("/public", experss.static("public"));
+   
+   
+//"start": "NODE_ENV=development ./node_modules/.bin/netlify-lambda serve src",
 
 // GET REQUEST
-app.get("/getSesstion/:id", (req, res) => {console.log(req.params.id)
+app.get("/getSesstion", (req, res) => {console.log(req.params.id)
   try {Store.findById(req.params.id)
 .then((data) => {
 res.send(data);

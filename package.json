@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "./node_modules/ serve src"
+    "start": "./node_modules/.bin/ serve src"
     ,"build":"./node_modules/ build src"
   },
   "dependencies": {
